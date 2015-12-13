@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">wordplay</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_intro_uno">IntroUno</string>
+    <string name="title_activity_intro_dos">IntroDos</string>
+    <string name="title_activity_preguntas_word_play">PreguntasWordPlay</string>
+    <string name="title_activity_finalizar">Finalizar</string>
+    <string name="title_activity_intro_tres">IntroTres</string>
+</resources>
