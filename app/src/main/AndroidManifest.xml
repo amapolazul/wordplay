@@ -9,11 +9,13 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".intro.IntroUno"
-            android:label="@string/title_activity_intro_uno" >
+            android:label="@string/title_activity_intro_uno"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -21,19 +23,23 @@
         </activity>
         <activity
             android:name=".intro.IntroDos"
-            android:label="@string/title_activity_intro_dos" >
+            android:label="@string/title_activity_intro_dos"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".preguntas.PreguntasWordPlay"
-            android:label="@string/title_activity_preguntas_word_play" >
+            android:label="@string/title_activity_preguntas_word_play"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".preguntas.Finalizar"
-            android:label="@string/title_activity_finalizar" >
+            android:label="@string/title_activity_finalizar"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".intro.IntroTres"
-            android:label="@string/title_activity_intro_tres" >
+            android:label="@string/title_activity_intro_tres"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

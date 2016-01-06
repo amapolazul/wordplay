@@ -20,7 +20,7 @@ public class QuizSQLiteHelper extends SQLiteOpenHelper {
 
 
     private static final String DATABASE_NAME = "wordplay.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Database creation sql statement
     private static final String DATABASE_CREATE = "create table "

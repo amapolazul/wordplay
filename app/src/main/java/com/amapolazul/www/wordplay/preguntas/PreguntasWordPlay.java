@@ -66,7 +66,7 @@ public class PreguntasWordPlay extends Activity {
             quizDao = new QuizDAO(this);
             quizDao.open();
             preguntas = quizDao.darPreguntas();
-            indicePrguntaActual = quizDao.darIdPreguntaActual() - 1;
+            indicePrguntaActual = quizDao.darIdPreguntaActual();
             inicializarQuiz();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -182,7 +182,7 @@ public class PreguntasWordPlay extends Activity {
                     busyDialog.dismiss();
                     indicePrguntaActual++;
                     if(indicePrguntaActual < preguntas.size()){
-                        quizDao.actualizarPreguntaActual(preguntas.get(indicePrguntaActual).getId().toString());
+                        quizDao.actualizarPreguntaActual(String.valueOf(indicePrguntaActual));
                         inicializarQuiz();
                     } else {
                         Intent intent = new Intent(PreguntasWordPlay.this, Finalizar.class);

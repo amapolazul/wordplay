@@ -2,7 +2,9 @@ package com.amapolazul.www.wordplay;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,35 +22,58 @@ import java.util.List;
 
 public class MainActivity extends Activity {
 
-    private QuizDAO quizDao;
+    private ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        try {
-            quizDao = new QuizDAO(this);
-            quizDao.open();
-            int[] imagenes = DatabaseStartup.darImagenesId();
-            String[] respuestas = DatabaseStartup.palabrasRespuestas();
-            int[] popups = DatabaseStartup.darPopupsId();
-            //quizDao.removeAll();
-            List<Pregunta> preguntas = quizDao.darPreguntas();
-            if(preguntas == null || preguntas.isEmpty()){
-                for(int i = 0; i < respuestas.length; i++){
+        pd = new ProgressDialog(this);
+        pd.setMessage("Cargando preguntas");
+        pd.setTitle("Wordplay");
+        pd.show();
+        new CargarPreguntasThread(this).execute();
+    }
 
-                    Pregunta pregunta = new Pregunta();
-                    pregunta.setImagen(imagenes[i]);
-                    pregunta.setRespuestaCorrecta(String.valueOf(respuestas[i]));
-                    pregunta.setPopupImagen(popups[i]);
-                    System.out.println("guardando pregunta " + pregunta.getRespuestaCorrecta() + " " + pregunta.getPopupImagen());
-                    quizDao.crearPregunta(pregunta);
+    private class CargarPreguntasThread extends AsyncTask<Void, Void, Void> {
+
+        private QuizDAO quizDao;
+
+        public CargarPreguntasThread(Context context){
+            System.out.println(context);
+            quizDao = new QuizDAO(context);
+        }
+
+        protected Void doInBackground(Void... args) {
+            try {
+                quizDao.open();
+                int[] imagenes = DatabaseStartup.darImagenesId();
+                String[] respuestas = DatabaseStartup.palabrasRespuestas();
+                int[] popups = DatabaseStartup.darPopupsId();
+                //quizDao.removeAll();
+                List<Pregunta> preguntas = quizDao.darPreguntas();
+                if(preguntas == null || preguntas.isEmpty()){
+                    for(int i = 0; i < respuestas.length; i++){
+
+                        Pregunta pregunta = new Pregunta();
+                        pregunta.setImagen(imagenes[i]);
+                        pregunta.setRespuestaCorrecta(String.valueOf(respuestas[i]));
+                        pregunta.setPopupImagen(popups[i]);
+                        System.out.println("guardando pregunta " + pregunta.getRespuestaCorrecta() + " " + pregunta.getPopupImagen());
+                        quizDao.crearPregunta(pregunta);
+                    }
+                    quizDao.insertarPreguntaActual("0");
                 }
-                quizDao.insertarPreguntaActual("1");
+                pd.dismiss();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return null;
+        }
+
+        protected void onPostExecute(Void result) {
+
         }
     }
 

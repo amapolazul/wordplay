@@ -88,7 +88,7 @@ public class QuizDAO {
             c.moveToNext();
             return result;
         } else {
-            return 1;
+            return 0;
         }
     }
 
@@ -96,7 +96,7 @@ public class QuizDAO {
         ContentValues values = new ContentValues();
         values.put(QuizSQLiteHelper.QUIZ_PREGUNTA_ACTUAL, idPreguntaActual);
         int update = database.update(QuizSQLiteHelper.TABLA_PREGUNTA_ACTUAL,
-                values,  "id_pregunta_actual "+"="+(Integer.parseInt(idPreguntaActual)), null);
+                values,  "id_pregunta_actual "+"="+(Integer.parseInt(idPreguntaActual) - 1), null);
         return update;
     }
 

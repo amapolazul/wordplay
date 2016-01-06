@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.amapolazul.www.wordplay.MainActivity;
 import com.amapolazul.www.wordplay.R;
 import com.amapolazul.www.wordplay.peristencia.QuizDAO;
 
@@ -20,17 +21,19 @@ public class Finalizar extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finalizar);
-        try {
-            quizDao = new QuizDAO(this);
-            quizDao.open();
-            quizDao.actualizarPreguntaActual("1");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
     }
 
     public void goToPreguntas(View view) {
-        Intent intent = new Intent(this, PreguntasWordPlay.class);
+        try {
+            quizDao = new QuizDAO(this);
+            quizDao.open();
+            quizDao.removeAll();
+            quizDao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
