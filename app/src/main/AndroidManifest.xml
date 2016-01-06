@@ -9,12 +9,12 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
+            android:label="WordPlay"
             android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".intro.IntroUno"
-            android:label="@string/title_activity_intro_uno"
+            android:label="WordPlay"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
